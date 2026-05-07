@@ -1,0 +1,26 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Internal docs (NEVER push: contient IP VPS, paths serveur, infos infra)
+PROJET_ETAT.md
+
+# Claude / IDE / OS
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+*.bak
+*.orig

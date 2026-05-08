@@ -82,7 +82,7 @@ npm install
 **Option B — via SCP depuis Windows**
 ```bash
 # Dans PowerShell sur ta machine :
-scp -r "C:\Users\Alexi\project bot ia discord" user@ton-ip:/home/user/discord-bots
+scp -r ./aria-nyx-bots user@ton-ip:/home/user/discord-bots
 ```
 
 ### Étape 5 — Configurer .env

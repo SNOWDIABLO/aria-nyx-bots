@@ -10,7 +10,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.27.0",
     "openai": "^4.47.1",
     "dotenv": "^16.4.5",
     "winston": "^3.13.0"

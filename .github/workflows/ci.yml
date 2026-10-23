@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --omit=dev
+      - name: Syntaxe de tous les fichiers
+        run: for f in index.js diag.js src/*.js; do node --check "$f"; done
+      - name: Le bot se charge sans se connecter a Discord
+        run: |
+          node -e "
+            const { createBot } = require('./src/botInstance');
+            if (typeof createBot !== 'function') throw new Error('createBot absent');
+            const { Client, GatewayIntentBits } = require('discord.js');
+            new Client({ intents: [GatewayIntentBits.Guilds] }).destroy();
+            require('openai'); require('winston');
+            console.log('OK discord.js', require('discord.js/package.json').version);
+          "
+      - name: Audit des dependances de prod
+        run: npm audit --omit=dev --audit-level=high

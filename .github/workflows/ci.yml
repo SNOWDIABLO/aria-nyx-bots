@@ -18,6 +18,9 @@ jobs:
       - name: Syntaxe de tous les fichiers
         run: for f in index.js diag.js src/*.js; do node --check "$f"; done
       - name: Le bot se charge sans se connecter a Discord
+        env:
+          OPENAI_API_KEY: ci-fausse-cle-jamais-utilisee
+          OPENROUTER_API_KEY: ci-fausse-cle-jamais-utilisee
         run: |
           node -e "
             const { createBot } = require('./src/botInstance');

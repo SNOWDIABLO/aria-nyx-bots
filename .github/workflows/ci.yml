@@ -28,7 +28,7 @@ jobs:
             const { Client, GatewayIntentBits } = require('discord.js');
             new Client({ intents: [GatewayIntentBits.Guilds] }).destroy();
             require('openai'); require('winston');
-            console.log('OK discord.js', require('discord.js/package.json').version);
+            console.log('OK discord.js', require('discord.js').version);
           "
       - name: Audit des dependances de prod
         run: npm audit --omit=dev --audit-level=high

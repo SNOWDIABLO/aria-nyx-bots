@@ -25,6 +25,8 @@ function createBot(botId, otherBotRef) {
       GatewayIntentBits.MessageContent,
       GatewayIntentBits.GuildMembers,
     ],
+    // Jamais de ping @everyone/@here/roles, meme si un membre ou l'IA l'ecrit
+    allowedMentions: { parse: ['users'], repliedUser: true },
   });
 
   // Délai aléatoire pour simuler une vraie réflexion
@@ -465,9 +467,9 @@ function createBot(botId, otherBotRef) {
         logger.error(`Erreur /imagine: ${err.message}`);
         try {
           if (interaction.deferred) {
-            await interaction.editReply(`❌ Erreur lors de la génération : ${err.message.substring(0, 100)}`);
+            await interaction.editReply('❌ La génération a échoué, réessaie dans une minute.');
           } else if (!interaction.replied) {
-            await interaction.reply({ content: `❌ Erreur : ${err.message.substring(0, 100)}`, ephemeral: true });
+            await interaction.reply({ content: '❌ La génération a échoué, réessaie dans une minute.', ephemeral: true });
           }
         } catch (_) {}
       }
